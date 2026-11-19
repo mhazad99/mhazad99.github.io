@@ -6,29 +6,43 @@ export default {
   githubUser: 'mhazad99',
 
   // Leave empty to use the name on your GitHub profile.
-  name: '',
+  name: 'Mohammad Hasan Azad',
 
   // One line under your name. Leave empty to use your GitHub bio.
-  tagline: '',
+  tagline: 'Software developer for sleep research at CEAMS, Hôpital du Sacré-Cœur de Montréal',
   fallbackTagline: 'Sleep research, biomedical signals and machine learning',
 
-  // A short paragraph about you. Write it in your own words.
-  bio: `I build tools for sleep research: detecting rapid eye movements,
-scoring sleep automatically, and studying how the brain and heart work
-together during sleep. Most of my work is in Python and MATLAB.`,
+  // A short paragraph about you.
+  bio: `I'm an electrical and biomedical engineer in Montréal with more than six
+years of experience in software development, biomedical signal processing and
+machine learning. At CEAMS I build the Snooz Toolbox, from algorithm design to the
+interface, testing and cross-platform releases, and I work with researchers and
+sleep labs on new analysis methods. My master's research at ÉTS used sleep EEG and
+ECG to detect depression.`,
 
   // Links shown at the top. Remove a line to hide it; add your own.
   links: [
+    { label: 'Email', url: 'mailto:mhazad1999@gmail.com' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/mohammad-hasan-azad/' },
     { label: 'GitHub', url: 'https://github.com/mhazad99' },
-    // { label: 'Email', url: 'mailto:you@mhazad.com' },
-    // { label: 'LinkedIn', url: 'https://www.linkedin.com/in/your-name' },
-    // { label: 'ORCID', url: 'https://orcid.org/0000-0000-0000-0000' },
-    // { label: 'CV (PDF)', url: '/cv.pdf' },
+    // { label: 'CV (PDF)', url: '/cv.pdf' },   // put cv.pdf in the public folder
   ],
 
-  // Which GitHub repositories appear on the site:
+  // Repositories in other accounts that I commit to. The site shows how many
+  // commits I made in each and when the last one was, updated every day.
+  contributions: [
+    'SnoozToolbox/snooz-package-ceams',
+    'SnoozToolbox/snooz-toolbox',
+    'SnoozToolbox/SnoozDoc',
+    'SnoozToolbox/snooz_installers_public',
+    'SnoozToolbox/harmonie_reader',
+    'SnoozToolbox/snooz-package-template',
+  ],
+
+  // Which of my own GitHub repositories appear under "Other projects":
   // add this topic to a repo on GitHub and it shows up automatically.
-  // Until at least one repo has the topic, all your own (non-fork) repos are shown.
+  // Until at least one repo has the topic, all my own (non-fork) repos are shown.
+  // Repos already linked in work.yaml or cv.yaml are not repeated there.
   portfolioTopic: 'portfolio',
 
   // Repositories to never show, by name.

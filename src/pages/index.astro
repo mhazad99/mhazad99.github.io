@@ -4,48 +4,59 @@ import '../styles/global.css';
 import { parse } from 'yaml';
 import config from '../../site.config.mjs';
 import gh from '../data/github.json';
-import extraText from '../data/projects.yaml?raw';
+import projectsText from '../data/projects.yaml?raw';
+import workText from '../data/work.yaml?raw';
+import cvText from '../data/cv.yaml?raw';
 import Hypnogram from '../components/Hypnogram.astro';
+import Block from '../components/Block.astro';
+import Item from '../components/Item.astro';
 
-const extra = parse(extraText) ?? {};
+const extra = parse(projectsText) ?? {};
+const work = parse(workText) ?? {};
+const cv = parse(cvText) ?? {};
+
 const name = config.name || gh.profile?.name || config.githubUser;
 const tagline = config.tagline || gh.profile?.bio || config.fallbackTagline;
-const avatar = gh.profile?.avatar;
 
-// GitHub projects: repos with the portfolio topic, or all your own repos until you tag some.
+const month = (d) => d.toLocaleDateString('en', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+
+// Repositories I contribute to, with live commit counts.
+const contributions = (gh.contributions ?? []).filter((c) => c.myCommits > 0).sort((a, b) => b.myCommits - a.myCommits);
+const totalCommits = contributions.reduce((n, c) => n + c.myCommits, 0);
+
+// "Other projects": my own repos not already linked above, plus entries from projects.yaml.
+const linked = new Set(
+  [workText, cvText].join('\n')
+    .match(new RegExp(`github\\.com/${config.githubUser}/[A-Za-z0-9_.-]+`, 'g'))
+    ?.map((u) => u.split('/').pop()) ?? []
+);
 const visible = gh.repos.filter((r) => !r.archived && !config.hide.includes(r.name));
 const tagged = visible.filter((r) => r.topics.includes(config.portfolioTopic));
-const chosen = tagged.length ? tagged : visible.filter((r) => !r.fork);
+const chosen = (tagged.length ? tagged : visible.filter((r) => !r.fork)).filter((r) => !linked.has(r.name));
 const overrides = extra.github ?? {};
 const pretty = (s) => s.replace(/[-_]+/g, ' ');
-
-const items = [
+const others = [
   ...chosen.map((r) => {
     const o = overrides[r.name] ?? {};
     return {
       title: o.title ?? pretty(r.name),
       description: o.description ?? r.description,
       date: new Date(r.pushedAt),
-      updated: true,
-      url: r.url,
-      linkText: 'Code on GitHub',
-      homepage: r.homepage,
-      language: r.language,
-      stars: r.stars,
+      href: r.url,
+      meta: [r.language, r.stars > 0 ? `${r.stars} ${r.stars === 1 ? 'star' : 'stars'}` : null],
+      links: [{ label: 'Code on GitHub', url: r.url }, ...(r.homepage ? [{ label: 'Website', url: r.homepage }] : [])],
     };
   }),
   ...(extra.other ?? []).filter(Boolean).map((p) => ({
     title: p.title,
     description: p.description,
     date: new Date(String(p.date)),
-    updated: false,
-    url: p.url,
-    linkText: p.where ? `View on ${p.where}` : 'View',
-    where: p.where,
+    href: p.url,
+    meta: [p.where],
+    links: p.url ? [{ label: 'View', url: p.url }] : [],
   })),
 ].sort((a, b) => b.date - a.date);
 
-const month = (d) => d.toLocaleDateString('en', { month: 'short', year: 'numeric', timeZone: 'UTC' });
 const lastSync = new Date(gh.fetchedAt).toLocaleDateString('en', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 const year = new Date().getUTCFullYear();
 ---
@@ -62,10 +73,16 @@ const year = new Date().getUTCFullYear();
     <meta property="og:title" content={name} />
     <meta property="og:description" content={tagline} />
     <meta property="og:url" content={Astro.site} />
-    {avatar && <meta property="og:image" content={avatar} />}
+    {gh.profile?.avatar && <meta property="og:image" content={gh.profile.avatar} />}
   </head>
   <body>
     <header class="hero">
+      <nav class="wrap nav" aria-label="Sections">
+        <a href="#work">Work</a>
+        <a href="#research">Research</a>
+        <a href="#projects">Other projects</a>
+        <a href="#experience">Experience</a>
+      </nav>
       <div class="wrap">
         <h1>{name}</h1>
         <p class="tagline">{tagline}</p>
@@ -77,75 +94,124 @@ const year = new Date().getUTCFullYear();
 
     <main class="wrap">
       <section class="about" aria-label="About">
-        {avatar && <img class="avatar" src={avatar} alt="" width="88" height="88" />}
-        <div>
-          <p class="bio">{config.bio}</p>
-          <ul class="links">
-            {config.links.map((l) => <li><a href={l.url}>{l.label}</a></li>)}
-          </ul>
-        </div>
+        <p class="bio">{config.bio}</p>
+        <ul class="links">
+          {config.links.map((l) => <li><a href={l.url}>{l.label}</a></li>)}
+        </ul>
       </section>
 
-      <section class="projects" aria-labelledby="projects-h">
-        <h2 id="projects-h">Projects</h2>
-        <p class="lede">Ordered by most recent activity.</p>
-        <ol class="list">
-          {items.map((p) => (
-            <li class="item">
-              <time datetime={p.date.toISOString()}>
-                {p.updated && <span class="sr-only">Updated </span>}{month(p.date)}
-              </time>
-              <div class="body">
-                <h3>{p.url ? <a href={p.url}>{p.title}</a> : p.title}</h3>
-                {p.description && <p class="desc">{p.description}</p>}
-                <ul class="meta">
-                  {p.language && <li>{p.language}</li>}
-                  {p.where && !p.url && <li>{p.where}</li>}
-                  {p.stars > 0 && <li>{p.stars} {p.stars === 1 ? 'star' : 'stars'}</li>}
-                  {p.homepage && <li><a href={p.homepage}>Website</a></li>}
-                  {p.url && <li><a href={p.url}>{p.linkText}</a></li>}
-                </ul>
-              </div>
-            </li>
-          ))}
-        </ol>
+      <section class="section" id="work" aria-labelledby="work-h">
+        <h2 id="work-h">Software for sleep research</h2>
+        <p class="lede">{work.intro}</p>
+
+        {work.categories?.map((cat) => (
+          <Block label={cat.title} summary={cat.summary}>
+            <ol>{cat.items.map((it) => <Item {...it} href={it.links?.[0]?.url} />)}</ol>
+          </Block>
+        ))}
+
+        {contributions.length > 0 && (
+          <Block label="Repositories" summary={`${totalCommits} commits in ${contributions.length} repositories, updated daily from GitHub.`}>
+            <table class="repos">
+              <thead>
+                <tr><th scope="col">Repository</th><th scope="col">My commits</th><th scope="col">Last commit</th></tr>
+              </thead>
+              <tbody>
+                {contributions.map((c) => (
+                  <tr>
+                    <td><a href={c.url}>{c.repo.split('/')[1]}</a></td>
+                    <td class="num">{c.myCommits}</td>
+                    <td>{c.lastCommit ? month(new Date(c.lastCommit)) : ''}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Block>
+        )}
+      </section>
+
+      <section class="section" id="research" aria-labelledby="research-h">
+        <h2 id="research-h">Research</h2>
+        <Block label="Master's research" summary="École de technologie supérieure, Montréal">
+          <ol>{cv.research?.map((it) => <Item {...it} href={it.links?.[0]?.url} />)}</ol>
+        </Block>
+        <Block label="Publications">
+          <ol class="pubs">
+            {cv.publications?.map((p) => (
+              <li>
+                <span class="pub-year">{p.year}</span>
+                <p>
+                  {p.authors && <span>{p.authors} </span>}
+                  <span class="pub-title">{p.title}.</span>{' '}
+                  <span class="pub-venue">{p.venue}.</span>
+                </p>
+              </li>
+            ))}
+          </ol>
+        </Block>
+      </section>
+
+      <section class="section" id="projects" aria-labelledby="projects-h">
+        <h2 id="projects-h">Other projects</h2>
+        <Block label="Machine learning and personal projects" summary="Newest first. Repositories from my GitHub appear here by themselves.">
+          <ol>
+            {others.map((p) => <Item title={p.title} when={month(p.date)} description={p.description} href={p.href} meta={p.meta} links={p.links} />)}
+          </ol>
+        </Block>
+      </section>
+
+      <section class="section" id="experience" aria-labelledby="experience-h">
+        <h2 id="experience-h">Experience and education</h2>
+        <Block label="Experience">
+          <ol>
+            {cv.experience?.map((e) => <Item title={e.role} when={e.when} description={e.note} meta={[e.org, e.place]} />)}
+          </ol>
+        </Block>
+        <Block label="Education">
+          <ol>
+            {cv.education?.map((e) => <Item title={e.degree} when={e.when} description={e.note} meta={[e.org, e.place]} />)}
+          </ol>
+        </Block>
       </section>
     </main>
 
     <footer class="wrap foot">
-      <p>Projects update from GitHub automatically. Last updated {lastSync}.</p>
+      <p>Projects and commit counts update from GitHub automatically. Last updated {lastSync}.</p>
       <p>© {year} {name}</p>
     </footer>
   </body>
 </html>
 
 <style>
-  .hero { padding-block: clamp(3rem, 9vw, 6.5rem) 0; }
+  .hero { padding-block: 1.5rem 0; }
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.25rem 1.5rem;
+    font-size: 0.925rem;
+  }
+  .nav a { text-decoration-color: transparent; color: var(--muted); }
+  .nav a:hover { color: var(--ink); text-decoration-color: var(--rem); }
   h1 {
-    font-size: clamp(2.75rem, 8.5vw, 6rem);
+    margin-top: clamp(2.5rem, 8vw, 5rem);
+    font-size: clamp(2.6rem, 7.5vw, 5.6rem);
     line-height: 0.98;
     font-weight: 760;
     letter-spacing: -0.035em;
-    max-width: 14ch;
-    overflow-wrap: anywhere;
+    max-width: 12ch;
+    text-wrap: balance;
   }
   .tagline {
     margin-top: 1rem;
     font-size: clamp(1.15rem, 2.2vw, 1.45rem);
     color: var(--muted);
-    max-width: 42ch;
+    max-width: 40ch;
     line-height: 1.35;
   }
   .trace-wrap { margin-top: clamp(2.5rem, 6vw, 4rem); }
 
-  .about {
-    margin-top: clamp(3rem, 7vw, 5rem);
-    display: flex;
-    gap: 1.5rem;
-    align-items: flex-start;
-    max-width: var(--text);
-  }
-  .avatar { border-radius: 50%; flex: none; background: var(--grid); }
+  .about { margin-top: clamp(3rem, 7vw, 5rem); max-width: var(--text); }
   .bio { font-size: 1.125rem; line-height: 1.6; }
   .links {
     list-style: none;
@@ -157,54 +223,40 @@ const year = new Date().getUTCFullYear();
     font-weight: 600;
   }
 
-  .projects { margin-top: clamp(4rem, 9vw, 6rem); }
+  .section { margin-top: clamp(4rem, 9vw, 6.5rem); scroll-margin-top: 1rem; }
   h2 {
-    font-size: 1.75rem;
-    font-weight: 720;
+    font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+    font-weight: 740;
     letter-spacing: -0.02em;
+    line-height: 1.15;
   }
-  .lede { margin-top: 0.25rem; color: var(--muted); }
-  .list {
-    list-style: none;
-    padding: 0;
-    margin: 2rem 0 0;
-    border-top: 1px solid var(--rule);
-  }
-  .item {
-    display: grid;
-    grid-template-columns: 7.5rem minmax(0, var(--text));
-    gap: 1.5rem;
-    padding-block: 1.6rem;
-    border-bottom: 1px solid var(--rule);
-  }
-  time {
+  .lede { margin: 0.75rem 0 2rem; max-width: var(--text); color: var(--muted); font-size: 1.05rem; }
+  h2 + :global(.block) { margin-top: 2rem; }
+
+  .repos { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .repos th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.875rem;
     color: var(--muted);
-    font-variant-numeric: tabular-nums;
-    padding-top: 0.2rem;
+    padding: 0 0 0.5rem;
   }
-  h3 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-  }
-  h3 a { text-decoration-color: transparent; }
-  h3 a:hover { text-decoration-color: var(--rem); }
-  .desc { margin-top: 0.4rem; }
-  .meta {
-    list-style: none;
-    padding: 0;
-    margin: 0.75rem 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 1.25rem;
-    font-size: 0.9rem;
-    color: var(--muted);
-  }
+  .repos td { padding: 0.55rem 0; border-top: 1px solid var(--rule); }
+  .repos th:nth-child(2), .repos .num { text-align: right; padding-right: 2rem; }
+  .repos td:last-child, .repos th:last-child { color: var(--muted); white-space: nowrap; }
+
+  .pubs li { display: grid; grid-template-columns: 4rem 1fr; gap: 1rem; padding-block: 0.9rem; border-bottom: 1px solid var(--rule); }
+  .pubs li:first-child { padding-top: 0; }
+  .pubs li:last-child { border-bottom: 0; }
+  .pub-year { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .pubs p { margin: 0; }
+  .pub-title { font-weight: 650; }
+  .pub-venue { color: var(--muted); }
 
   .foot {
     margin-top: clamp(4rem, 9vw, 6rem);
     padding-block: 2rem 3rem;
+    border-top: 1px solid var(--rule);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -214,7 +266,8 @@ const year = new Date().getUTCFullYear();
   }
 
   @media (max-width: 40rem) {
-    .item { grid-template-columns: 1fr; gap: 0.35rem; }
-    .about { flex-direction: column; gap: 1rem; }
+    .nav { justify-content: flex-start; }
+    .pubs li { grid-template-columns: 1fr; gap: 0.15rem; }
+    .repos th:nth-child(2), .repos .num { padding-right: 1rem; }
   }
 </style>

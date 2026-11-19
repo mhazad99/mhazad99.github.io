@@ -1,0 +1,66 @@
+# Research, publications, experience and education (from my CV).
+
+research:
+  - title: Brain–heart coherence and SleepDepNet
+    when: Sep 2022 – Jul 2025
+    description: >-
+      My master's research at ÉTS: coherence between sleep EEG and ECG in major
+      depression and insomnia, and SleepDepNet, a recurrent-convolutional network
+      that detects depression from sleep brain–heart biomarkers.
+    links:
+      - { label: Code, url: https://github.com/mhazad99/Heart-Brain-Project }
+
+publications:
+  - year: 2024
+    authors: Azad, M.H. et al.
+    title: "SleepDepNet: A multimodal recurrent-convolutional network for depression detection using sleep brain-heart biomarkers"
+    venue: Submitted to IEEE Transactions on Biomedical Engineering
+  - year: 2024
+    authors: Farzam, R., Azad, M.H., Moghaddam, H.A., Forouzanfar, M.
+    title: "Beat-to-beat oscillometric blood pressure estimation: A Bayesian approach with system identification"
+    venue: IEEE Transactions on Biomedical Engineering
+  - year: 2024
+    authors: Azad, M.H. et al.
+    title: Brain-heart coherence in insomnia disorder
+    venue: 27th Congress of the European Sleep Research Society
+  - year: 2024
+    authors: Azad, M.H. et al.
+    title: "Unraveling sleep EEG-ECG interactions in major depression: Preliminary results of a coherence analysis"
+    venue: Sleep, 47(Suppl 1), A412
+  - year: 2021
+    authors: Azad, M.H. et al.
+    title: "Toward continuous estimation of cardiorespiratory parameters in oscillometry: A simulation study"
+    venue: IEEE MeMeA, 1–5
+  - year: Patent
+    title: System of electricity generation from a speed bump with a graphene hard chromic roller
+    venue: Iran Patent No. 93568
+
+experience:
+  - role: Software Developer
+    org: CEAMS, Hôpital du Sacré-Cœur de Montréal
+    place: Montréal
+    when: Jan 2025 – present
+  - role: Research Assistant
+    org: École de technologie supérieure
+    place: Montréal
+    when: Sep 2022 – Jul 2025
+  - role: Teaching Assistant
+    org: K. N. Toosi University of Technology
+    place: Tehran
+    when: Sep 2020 – Aug 2021
+    note: Engineering mathematics, probability and statistics, communication systems
+  - role: President, IEEE KNTU Student Branch
+    org: IEEE Iran Section (volunteer)
+    place: Tehran
+    when: Sep 2019 – Sep 2021
+
+education:
+  - degree: MASc, Electrical Engineering
+    org: École de technologie supérieure
+    place: Montréal
+    when: 2022 – 2025
+    note: GPA 4.24/4.30. ÉTS scholarships worth 30k CAD.
+  - degree: BSc, Electrical Engineering (Telecommunication)
+    org: K. N. Toosi University of Technology
+    place: Tehran
+    when: 2017 – 2022

@@ -1,0 +1,47 @@
+---
+// One entry: a project, a job, a paper. Every field is optional except title.
+const { title, when, description, links = [], meta = [], href } = Astro.props;
+---
+<li class="item">
+  {when && <p class="when">{when}</p>}
+  <h4>{href ? <a href={href}>{title}</a> : title}</h4>
+  {description && <p class="desc">{description}</p>}
+  {(meta.length > 0 || links.length > 0) && (
+    <ul class="meta">
+      {meta.filter(Boolean).map((m) => <li>{m}</li>)}
+      {links.map((l) => <li><a href={l.url}>{l.label}</a></li>)}
+    </ul>
+  )}
+</li>
+
+<style>
+  .item { padding-block: 1.4rem; border-bottom: 1px solid var(--rule); }
+  .item:first-child { padding-top: 0; }
+  .item:last-child { border-bottom: 0; padding-bottom: 0; }
+  .when {
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 0.2rem;
+  }
+  h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  h4 a { text-decoration-color: transparent; }
+  h4 a:hover { text-decoration-color: var(--rem); }
+  .desc { margin-top: 0.35rem; }
+  .meta {
+    list-style: none;
+    padding: 0;
+    margin: 0.6rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+</style>

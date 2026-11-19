@@ -1,0 +1,41 @@
+---
+// A labelled block: the label and a short summary on the left, the content on the right.
+const { label, summary, id } = Astro.props;
+---
+<section class="block" id={id}>
+  <div class="side">
+    <h3>{label}</h3>
+    {summary && <p>{summary}</p>}
+  </div>
+  <div class="main"><slot /></div>
+</section>
+
+<style>
+  .block {
+    display: grid;
+    grid-template-columns: minmax(0, 17rem) minmax(0, var(--text));
+    gap: 1rem 3.5rem;
+    padding-block: 2.25rem;
+    border-top: 1px solid var(--rule);
+  }
+  .side { align-self: start; position: sticky; top: 1.5rem; }
+  h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 720;
+    line-height: 1.3;
+  }
+  .side p {
+    margin: 0.4rem 0 0;
+    font-size: 0.925rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .main > :global(ol), .main > :global(ul) { list-style: none; margin: 0; padding: 0; }
+
+  @media (max-width: 52rem) {
+    .block { grid-template-columns: 1fr; gap: 1.25rem; padding-block: 1.75rem; }
+    .side { position: static; }
+    h3 { font-size: 1.35rem; }
+  }
+</style>

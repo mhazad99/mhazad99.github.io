@@ -1,7 +1,7 @@
 {
   "fetchedAt": "2026-11-19T04:30:00.000Z",
   "profile": {
-    "name": null,
+    "name": "Mohammad Hasan Azad",
     "bio": null,
     "location": null,
     "company": null,
@@ -9,13 +9,145 @@
     "url": "https://github.com/mhazad99"
   },
   "repos": [
-    { "name": "RenameNatus", "description": "Repository used to rename Natus files", "url": "https://github.com/mhazad99/RenameNatus", "homepage": null, "language": "Python", "topics": [], "stars": 0, "pushedAt": "2026-10-09T17:14:12Z", "fork": false, "archived": false },
-    { "name": "Heart-Brain-Project", "description": null, "url": "https://github.com/mhazad99/Heart-Brain-Project", "homepage": null, "language": "MATLAB", "topics": [], "stars": 0, "pushedAt": "2026-03-11T20:23:40Z", "fork": false, "archived": false },
-    { "name": "Rapid-Eye-Movement", "description": null, "url": "https://github.com/mhazad99/Rapid-Eye-Movement", "homepage": null, "language": "Python", "topics": [], "stars": 0, "pushedAt": "2025-09-22T20:25:08Z", "fork": false, "archived": false },
-    { "name": "Automatic-Sleep-Scoring-Package", "description": null, "url": "https://github.com/mhazad99/Automatic-Sleep-Scoring-Package", "homepage": null, "language": "Python", "topics": [], "stars": 0, "pushedAt": "2025-03-25T19:41:10Z", "fork": true, "archived": false },
-    { "name": "yasa", "description": null, "url": "https://github.com/mhazad99/yasa", "homepage": null, "language": "Python", "topics": [], "stars": 0, "pushedAt": "2025-03-25T18:51:07Z", "fork": true, "archived": false },
-    { "name": "SleepTransformerMASS", "description": null, "url": "https://github.com/mhazad99/SleepTransformerMASS", "homepage": null, "language": "Python", "topics": [], "stars": 0, "pushedAt": "2025-03-07T16:27:17Z", "fork": true, "archived": false },
-    { "name": "Machine-Learning-for-Engineers", "description": null, "url": "https://github.com/mhazad99/Machine-Learning-for-Engineers", "homepage": null, "language": "Jupyter Notebook", "topics": [], "stars": 0, "pushedAt": "2023-11-24T23:52:16Z", "fork": false, "archived": false },
-    { "name": "OOPS", "description": null, "url": "https://github.com/mhazad99/OOPS", "homepage": null, "language": "Python", "topics": [], "stars": 0, "pushedAt": "2020-02-21T14:12:29Z", "fork": false, "archived": false }
+    {
+      "name": "RenameNatus",
+      "description": "Repository used to rename Natus files",
+      "url": "https://github.com/mhazad99/RenameNatus",
+      "homepage": null,
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2026-10-09T17:14:12Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "name": "Heart-Brain-Project",
+      "description": null,
+      "url": "https://github.com/mhazad99/Heart-Brain-Project",
+      "homepage": null,
+      "language": "MATLAB",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2026-03-11T20:23:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "name": "Rapid-Eye-Movement",
+      "description": null,
+      "url": "https://github.com/mhazad99/Rapid-Eye-Movement",
+      "homepage": null,
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2025-09-22T20:25:08Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "name": "Automatic-Sleep-Scoring-Package",
+      "description": null,
+      "url": "https://github.com/mhazad99/Automatic-Sleep-Scoring-Package",
+      "homepage": null,
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2025-03-25T19:41:10Z",
+      "fork": true,
+      "archived": false
+    },
+    {
+      "name": "yasa",
+      "description": null,
+      "url": "https://github.com/mhazad99/yasa",
+      "homepage": null,
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2025-03-25T18:51:07Z",
+      "fork": true,
+      "archived": false
+    },
+    {
+      "name": "SleepTransformerMASS",
+      "description": null,
+      "url": "https://github.com/mhazad99/SleepTransformerMASS",
+      "homepage": null,
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2025-03-07T16:27:17Z",
+      "fork": true,
+      "archived": false
+    },
+    {
+      "name": "Machine-Learning-for-Engineers",
+      "description": null,
+      "url": "https://github.com/mhazad99/Machine-Learning-for-Engineers",
+      "homepage": null,
+      "language": "Jupyter Notebook",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2023-11-24T23:52:16Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "name": "OOPS",
+      "description": null,
+      "url": "https://github.com/mhazad99/OOPS",
+      "homepage": null,
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "pushedAt": "2020-02-21T14:12:29Z",
+      "fork": false,
+      "archived": false
+    }
+  ],
+  "contributions": [
+    {
+      "repo": "SnoozToolbox/snooz-package-ceams",
+      "url": "https://github.com/SnoozToolbox/snooz-package-ceams",
+      "description": "Core Snooz packages (CEAMSModules, CEAMSTools, CEAMSApps) developed by the CEAMS team",
+      "myCommits": 199,
+      "lastCommit": "2026-11-17T00:00:00Z"
+    },
+    {
+      "repo": "SnoozToolbox/snooz-toolbox",
+      "url": "https://github.com/SnoozToolbox/snooz-toolbox",
+      "description": "The Snooz Toolbox: an open-access, cross-platform Python desktop application for sleep data analysis",
+      "myCommits": 47,
+      "lastCommit": "2026-11-18T00:00:00Z"
+    },
+    {
+      "repo": "SnoozToolbox/SnoozDoc",
+      "url": "https://github.com/SnoozToolbox/SnoozDoc",
+      "description": "Documentation for the Snooz Toolbox",
+      "myCommits": 54,
+      "lastCommit": "2026-11-18T00:00:00Z"
+    },
+    {
+      "repo": "SnoozToolbox/snooz_installers_public",
+      "url": "https://github.com/SnoozToolbox/snooz_installers_public",
+      "description": "Installer builds and validation workflow",
+      "myCommits": 17,
+      "lastCommit": "2026-10-28T00:00:00Z"
+    },
+    {
+      "repo": "SnoozToolbox/harmonie_reader",
+      "url": "https://github.com/SnoozToolbox/harmonie_reader",
+      "description": "Reader and writer for Harmonie (Stellate) recordings",
+      "myCommits": 13,
+      "lastCommit": "2026-10-13T00:00:00Z"
+    },
+    {
+      "repo": "SnoozToolbox/snooz-package-template",
+      "url": "https://github.com/SnoozToolbox/snooz-package-template",
+      "description": "Template for new Snooz packages",
+      "myCommits": 2,
+      "lastCommit": "2026-11-10T00:00:00Z"
+    }
   ]
 }

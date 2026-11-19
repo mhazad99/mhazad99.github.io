@@ -1,0 +1,179 @@
+# My work on the Snooz Toolbox, grouped by topic.
+# Written from my commits in the SnoozToolbox repositories. Edit freely:
+# add an item, change a description, or move an item to another category.
+# Commit counts and "last commit" dates are filled in automatically at build time.
+
+intro: >-
+  Since March 2025 most of my work has gone into the Snooz Toolbox, an
+  open-access, cross-platform desktop application for sleep data analysis
+  developed at CEAMS. Here it is grouped by topic.
+
+docs: https://snooz-toolbox-documentation.readthedocs.io/latest/
+
+categories:
+  - title: Automatic sleep staging
+    summary: >-
+      Bringing YASA's automatic sleep staging into Snooz, so labs can score whole
+      recordings and compare the result with their own scoring.
+    items:
+      - title: Score Sleep Stages (YASA)
+        when: Mar 2025 – Oct 2026
+        description: >-
+          Scores sleep stages automatically and validates them against manual
+          scoring, with hypnodensity plots and a confusion-matrix report. Handles
+          discontinuous recordings and writes the new stages back into Stellate
+          and Natus files.
+        links:
+          - { label: Code, url: https://github.com/SnoozToolbox/snooz-package-ceams/tree/main/tools/CEAMSTools/ScoreSleepStagesYASA }
+          - { label: Docs, url: https://snooz-toolbox-documentation.readthedocs.io/latest/user_guide/tools/Preprocessing/YASA_Automatic_Sleep_Scoring.html }
+      - title: SleepTransformer for MASS
+        when: Mar 2025
+        description: >-
+          A fork of SleepTransformer adapted to the MASS dataset, with conversion
+          from R&K to AASM labels, to reproduce its accuracy.
+        links:
+          - { label: Code, url: https://github.com/mhazad99/SleepTransformerMASS }
+
+  - title: REM sleep
+    summary: >-
+      Finding rapid eye movements in the EOG and describing them in a report for
+      each recording.
+    items:
+      - title: Detect REMs (YASA)
+        when: May 2025 – Oct 2026
+        description: >-
+          Detects rapid eye movements and writes a REMs report with phasic and
+          tonic parameters, converting REMs to mini-epochs in the same run. Works
+          with Stellate and Natus recordings, including discontinuous files.
+        links:
+          - { label: Code, url: https://github.com/SnoozToolbox/snooz-package-ceams/tree/main/tools/CEAMSTools/DetectREMsYASA }
+          - { label: Docs, url: https://snooz-toolbox-documentation.readthedocs.io/latest/user_guide/tools/Preprocessing/DetectREMsYASA.html }
+      - title: Rapid eye movement packages
+        when: Mar – Sep 2025
+        description: >-
+          The first Snooz packages for REM detection, using polynomial and
+          shot-grouping approaches, plus ocular artifact correction during REM.
+        links:
+          - { label: Code, url: https://github.com/mhazad99/Rapid-Eye-Movement }
+
+  - title: EEG spectral analysis
+    summary: >-
+      Spectral power analysis that separates the periodic and aperiodic parts of
+      the EEG, and figures to compare it across a cohort.
+    items:
+      - title: Power Spectral Analysis
+        when: Sep 2025 – Sep 2026
+        description: >-
+          Added periodic and aperiodic analysis with the IRASA and FOOOF methods,
+          reports per stage hour, clock hour, sleep cycle and event, and analysis
+          of events on a channel other than the one they were annotated on.
+        links:
+          - { label: Code, url: https://github.com/SnoozToolbox/snooz-package-ceams/tree/main/tools/CEAMSTools/PowerSpectralAnalysis }
+          - { label: Docs, url: https://snooz-toolbox-documentation.readthedocs.io/latest/user_guide/tools/Processing/Power_Spectral_Analysis.html }
+      - title: Visualize EEG Spectral Power
+        when: Oct 2025 – Jul 2026
+        description: >-
+          A new tool that draws spectral power figures for each subject, group or
+          cohort, with regions of interest and independent log scales.
+        links:
+          - { label: Code, url: https://github.com/SnoozToolbox/snooz-package-ceams/tree/main/tools/CEAMSTools/PSAImages }
+          - { label: Docs, url: https://snooz-toolbox-documentation.readthedocs.io/latest/user_guide/tools/Postprocessing/Visualize_EEG_Spectral_Power.html }
+
+  - title: Spindles, slow waves and artifacts
+    summary: >-
+      Improvements to the detectors and reports that labs use to study sleep
+      microstructure.
+    items:
+      - title: Spindle and slow-wave reports
+        when: Jul – Nov 2025
+        description: >-
+          Results per clock hour and per stage hour in every spindle and slow-wave
+          report, slow-wave density, and a custom frequency band for A7 spindle
+          detection.
+        links:
+          - { label: Docs, url: https://snooz-toolbox-documentation.readthedocs.io/latest/user_guide/tools/Processing/Spindle_detection_A7.html }
+      - title: Slow-wave classification and artifact detection
+        when: Jul – Oct 2026
+        description: >-
+          Reproducible slow-wave classification, category settings that are saved
+          with the workspace, and artifact detection that works without an EMG
+          channel.
+        links:
+          - { label: Code, url: https://github.com/SnoozToolbox/snooz-package-ceams/tree/main/tools/CEAMSTools/SlowWaveClassification }
+
+  - title: Recording formats and data
+    summary: >-
+      Reading, writing and checking the clinical recording formats that sleep labs
+      use.
+    items:
+      - title: Harmonie (Stellate) reader
+        when: Jul – Oct 2026
+        description: >-
+          A C++ library with Python bindings that anonymizes patient information in
+          recording headers, writes sleep stages and replaces gold-standard scoring,
+          built for Windows, macOS and Linux with GitHub Actions.
+        links:
+          - { label: Code, url: https://github.com/SnoozToolbox/harmonie_reader }
+      - title: Natus recordings
+        when: Oct 2026
+        description: >-
+          Writing sleep stages into Natus .eeg files, and RenameNatus, a script that
+          organizes Natus study folders in bulk.
+        links:
+          - { label: Code, url: https://github.com/mhazad99/RenameNatus }
+      - title: Data checks and imports
+        when: Apr – Aug 2025
+        description: >-
+          Tools to validate Snooz annotation files, fix file paths in saved
+          workspaces, import annotations with elapsed or clock time, and check
+          EDFbrowser files before conversion.
+        links:
+          - { label: Docs, url: https://snooz-toolbox-documentation.readthedocs.io/latest/user_guide/tools/Preprocessing/ValidateSnoozTSVFile.html }
+
+  - title: Interface and platform
+    summary: The look and structure of the Snooz application itself.
+    items:
+      - title: The new look of Snooz Toolbox 1.1.0
+        when: Nov 2026
+        description: >-
+          A new theme with dark mode, a home page with tool search, a redesigned
+          process editor with zoom, search and connection highlights, step
+          indicators in every tool, a run progress window, and one font system for
+          all forms.
+        links:
+          - { label: Code, url: https://github.com/SnoozToolbox/snooz-toolbox }
+      - title: Help marks and package API
+        when: Mar – Aug 2026
+        description: >-
+          Automatic help marks on settings, package API 3.0.0 with automatic
+          versioning of tools and modules, and more flexible package folders.
+        links:
+          - { label: Code, url: https://github.com/SnoozToolbox/snooz-toolbox }
+
+  - title: Testing, releases and documentation
+    summary: Getting Snooz to users reliably, on desktops and on compute clusters.
+    items:
+      - title: Running on Compute Canada
+        when: Dec 2025 – Aug 2026
+        description: >-
+          Made every module run without a display on Compute Canada clusters, with a
+          pass or fail summary at the end of each run and guides for users and
+          developers.
+        links:
+          - { label: Docs, url: https://snooz-toolbox-documentation.readthedocs.io/latest/user_guide/ComputeCanada_Instruction_user.html }
+      - title: Installers and automated checks
+        when: Apr – Oct 2026
+        description: >-
+          Public installer builds with GitHub Actions, and a workflow that runs tools
+          such as sleep staging, spectral power figures and slow-wave classification
+          and checks their outputs.
+        links:
+          - { label: Code, url: https://github.com/SnoozToolbox/snooz_installers_public }
+      - title: Documentation
+        when: Mar 2025 – Nov 2026
+        description: >-
+          User guide pages for my tools, module descriptions in the developer guide,
+          and scripts that keep module versions in the docs up to date.
+        links:
+          - { label: Docs, url: https://snooz-toolbox-documentation.readthedocs.io/latest/ }
+          - { label: Code, url: https://github.com/SnoozToolbox/SnoozDoc }

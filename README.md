@@ -11,6 +11,9 @@ My personal website. It rebuilds by itself every time something is pushed to `ma
 | Change a project's title or description | Edit the `github:` part of `src/data/projects.yaml`. |
 | Add a paper, talk, dataset or non-GitHub project | Add an entry under `other:` in `src/data/projects.yaml`. |
 | Change my name, bio or links | Edit `site.config.mjs`. |
+| Edit my Snooz work (categories and items) | Edit `src/data/work.yaml`. |
+| Edit research, publications, experience, education | Edit `src/data/cv.yaml`. |
+| Track commits in another repo I contribute to | Add it to `contributions` in `site.config.mjs`. |
 | Rebuild right now | Actions tab → "Build and publish site" → Run workflow. |
 
 All of these can be done on github.com with the pencil icon. No local setup needed.

@@ -5,11 +5,36 @@
 #    Each entry needs a title and a date (YYYY-MM). Everything else is optional.
 #    They appear in the same list as your GitHub projects, ordered by date.
 other:
-  # - title: Title of your paper or project
+  # - title: Title of your project
   #   date: 2026-05
   #   description: One or two sentences on what it is.
-  #   where: Journal of Sleep Research      # shown as the source
-  #   url: https://doi.org/...
+  #   where: Bitbucket                      # shown as the source
+  #   url: https://...
+  - title: Trigger word detection
+    date: 2024-05
+    description: >-
+      Spectrograms and 1D convolutions feeding a GRU to detect a spoken trigger
+      word, trained on a large synthesized dataset.
+  - title: Emojifying text
+    date: 2024-03
+    description: >-
+      An LSTM that suggests emojis for sentences, built on word2vec and GloVe
+      embeddings and compared with bag-of-words and TF-IDF features.
+  - title: Neural machine translation with attention
+    date: 2024-01
+    description: >-
+      Translating sentences with a bidirectional LSTM and an attention mechanism
+      that focuses on the most relevant input words.
+  - title: Object recognition
+    date: 2023-03
+    description: >-
+      Classifying Japanese digits in a mixed MNIST dataset with ResNet, DenseNet,
+      LeNet-5, AlexNet and VGG-16, with hyperparameter tuning.
+  - title: Text classification
+    date: 2023-02
+    description: >-
+      Classifying Reddit posts from four subreddits after cleaning, tokenizing and
+      stemming, with K-fold cross-validation and a Kaggle test set.
 
 # 2) Better titles and descriptions for GitHub repos (keyed by repo name).
 #    Anything left out here comes straight from GitHub.
