@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-19T04:30:00.000Z",
+  "fetchedAt": "2026-11-19T18:56:09.967Z",
   "profile": {
     "name": "Mohammad Hasan Azad",
     "bio": null,
@@ -112,42 +112,48 @@
       "url": "https://github.com/SnoozToolbox/snooz-package-ceams",
       "description": "Core Snooz packages (CEAMSModules, CEAMSTools, CEAMSApps) developed by the CEAMS team",
       "myCommits": 199,
-      "lastCommit": "2026-11-17T00:00:00Z"
+      "lastCommit": "2026-11-19T13:29:19-05:00",
+      "allBranches": true
     },
     {
       "repo": "SnoozToolbox/snooz-toolbox",
       "url": "https://github.com/SnoozToolbox/snooz-toolbox",
       "description": "The Snooz Toolbox: an open-access, cross-platform Python desktop application for sleep data analysis",
-      "myCommits": 47,
-      "lastCommit": "2026-11-18T00:00:00Z"
+      "myCommits": 48,
+      "lastCommit": "2026-11-19T11:20:49-05:00",
+      "allBranches": true
     },
     {
       "repo": "SnoozToolbox/SnoozDoc",
       "url": "https://github.com/SnoozToolbox/SnoozDoc",
       "description": "Documentation for the Snooz Toolbox",
       "myCommits": 54,
-      "lastCommit": "2026-11-18T00:00:00Z"
+      "lastCommit": "2026-11-18T17:08:44-05:00",
+      "allBranches": true
     },
     {
       "repo": "SnoozToolbox/snooz_installers_public",
       "url": "https://github.com/SnoozToolbox/snooz_installers_public",
       "description": "Installer builds and validation workflow",
       "myCommits": 17,
-      "lastCommit": "2026-10-28T00:00:00Z"
+      "lastCommit": "2026-11-02T11:11:48-05:00",
+      "allBranches": true
     },
     {
       "repo": "SnoozToolbox/harmonie_reader",
       "url": "https://github.com/SnoozToolbox/harmonie_reader",
       "description": "Reader and writer for Harmonie (Stellate) recordings",
       "myCommits": 13,
-      "lastCommit": "2026-10-13T00:00:00Z"
+      "lastCommit": "2026-10-13T14:53:50-04:00",
+      "allBranches": true
     },
     {
       "repo": "SnoozToolbox/snooz-package-template",
       "url": "https://github.com/SnoozToolbox/snooz-package-template",
       "description": "Template for new Snooz packages",
       "myCommits": 2,
-      "lastCommit": "2026-11-10T00:00:00Z"
+      "lastCommit": "2026-11-10T17:34:16-05:00",
+      "allBranches": true
     }
   ]
 }

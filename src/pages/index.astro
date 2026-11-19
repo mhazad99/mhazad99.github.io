@@ -30,7 +30,8 @@ const linked = new Set(
     .match(new RegExp(`github\\.com/${config.githubUser}/[A-Za-z0-9_.-]+`, 'g'))
     ?.map((u) => u.split('/').pop()) ?? []
 );
-const visible = gh.repos.filter((r) => !r.archived && !config.hide.includes(r.name));
+const siteRepo = `${config.githubUser}.github.io`.toLowerCase();
+const visible = gh.repos.filter((r) => !r.archived && !config.hide.includes(r.name) && r.name.toLowerCase() !== siteRepo);
 const tagged = visible.filter((r) => r.topics.includes(config.portfolioTopic));
 const chosen = (tagged.length ? tagged : visible.filter((r) => !r.fork)).filter((r) => !linked.has(r.name));
 const overrides = extra.github ?? {};
@@ -111,7 +112,7 @@ const year = new Date().getUTCFullYear();
         ))}
 
         {contributions.length > 0 && (
-          <Block label="Repositories" summary={`${totalCommits} commits in ${contributions.length} repositories, updated daily from GitHub.`}>
+          <Block label="Repositories" summary={`${totalCommits} commits in ${contributions.length} repositories${contributions.every((c) => c.allBranches) ? ', counting every branch' : ''}. Updated daily from GitHub.`}>
             <table class="repos">
               <thead>
                 <tr><th scope="col">Repository</th><th scope="col">My commits</th><th scope="col">Last commit</th></tr>

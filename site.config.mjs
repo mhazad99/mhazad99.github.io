@@ -39,6 +39,16 @@ ECG to detect depression.`,
     'SnoozToolbox/snooz-package-template',
   ],
 
+  // Names and email addresses I commit with. Used to count my commits on every
+  // branch of the repositories above, not only the main branch.
+  commitAuthors: [
+    'Mohammad Hasan Azad',
+    'mhazad1999@gmail.com',
+    'mohammad-hasan.azad.1@ens.etsmtl.ca',
+    'mhazad99@users.noreply.github.com',
+    'mhazad@crhsc.local',
+  ],
+
   // Which of my own GitHub repositories appear under "Other projects":
   // add this topic to a repo on GitHub and it shows up automatically.
   // Until at least one repo has the topic, all my own (non-fork) repos are shown.
