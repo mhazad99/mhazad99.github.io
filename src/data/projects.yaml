@@ -1,0 +1,39 @@
+# Projects from anywhere other than GitHub, plus nicer wording for GitHub repos.
+# Edit this file on github.com (pencil icon) and commit — the site rebuilds by itself.
+
+# 1) Work that is not a GitHub repo: papers, talks, datasets, Bitbucket code, software.
+#    Each entry needs a title and a date (YYYY-MM). Everything else is optional.
+#    They appear in the same list as your GitHub projects, ordered by date.
+other:
+  # - title: Title of your paper or project
+  #   date: 2026-05
+  #   description: One or two sentences on what it is.
+  #   where: Journal of Sleep Research      # shown as the source
+  #   url: https://doi.org/...
+
+# 2) Better titles and descriptions for GitHub repos (keyed by repo name).
+#    Anything left out here comes straight from GitHub.
+github:
+  Heart-Brain-Project:
+    title: Brain–heart coherence
+    description: >-
+      Coherence analysis between brain and heart signals, with statistics and
+      bootstrapping in MATLAB, and SleepDepNet, a PyTorch model compared against
+      CNN and LSTM baselines.
+  Rapid-Eye-Movement:
+    title: Rapid eye movement tools for Snooz
+    description: >-
+      Snooz packages for REM sleep: REM detection with polynomial and
+      shot-grouping approaches, a YASA-based detector, and ocular artifact
+      correction during REM.
+  RenameNatus:
+    title: RenameNatus
+    description: >-
+      A script that renames Natus recording folders in bulk from a lookup table,
+      to keep study recordings organized.
+  Machine-Learning-for-Engineers:
+    title: Machine learning for engineers
+    description: Course assignments in machine learning, as Jupyter notebooks.
+  OOPS:
+    title: OOPS
+    description: An early object-oriented programming project in Python.

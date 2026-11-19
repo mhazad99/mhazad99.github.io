@@ -1,0 +1,125 @@
+---
+// A stylized hypnogram: one night of sleep stages, REM highlighted.
+// Stages, top to bottom: Wake, REM, N1, N2, N3. Durations are in minutes.
+const STAGES = ['W', 'REM', 'N1', 'N2', 'N3'];
+const night = [
+  ['W', 12], ['N1', 6], ['N2', 14], ['N3', 42], ['N2', 10], ['N3', 12], ['N2', 8], ['REM', 9],
+  ['N2', 6], ['W', 2], ['N1', 4], ['N2', 22], ['N3', 24], ['N2', 14], ['REM', 18],
+  ['N2', 26], ['N3', 10], ['N2', 18], ['W', 3], ['N1', 3], ['REM', 30],
+  ['N2', 34], ['N1', 4], ['N2', 22], ['REM', 34], ['W', 2], ['N1', 4], ['N2', 16],
+  ['REM', 30], ['N1', 4], ['N2', 7], ['W', 10],
+];
+const START_HOUR = 23;
+const level = (s) => 10 + STAGES.indexOf(s) * 20; // y in a 0–100 box
+
+let t = 0;
+let d = '';
+const rem = [];
+for (const [stage, mins] of night) {
+  const y = level(stage);
+  d += t === 0 ? `M0 ${y}` : ` V${y}`;
+  d += ` H${t + mins}`;
+  if (stage === 'REM') rem.push({ x1: t, x2: t + mins, y });
+  t += mins;
+}
+const total = t;
+const ticks = [];
+for (let m = 0; m <= total; m += 60) {
+  ticks.push({ left: (m / total) * 100, label: `${String((START_HOUR + m / 60) % 24).padStart(2, '0')}:00` });
+}
+const DRAW = 2.4; // seconds for the line to draw
+---
+<figure class="hypnogram">
+  <div class="plot" role="img" aria-label="Hypnogram: sleep stages across one night, with REM periods highlighted">
+    <ul class="stages" aria-hidden="true">
+      {STAGES.map((s) => <li class={s === 'REM' ? 'is-rem' : ''}>{s}</li>)}
+    </ul>
+    <div class="canvas">
+      <svg class="layer" viewBox={`0 0 ${total} 100`} preserveAspectRatio="none" aria-hidden="true">
+        {STAGES.map((s) => <line class="grid" x1="0" x2={total} y1={level(s)} y2={level(s)} />)}
+        {ticks.map((tk) => <line class="grid grid-v" y1="0" y2="100" x1={(tk.left / 100) * total} x2={(tk.left / 100) * total} />)}
+      </svg>
+      <svg class="layer night" viewBox={`0 0 ${total} 100`} preserveAspectRatio="none" aria-hidden="true">
+        <path class="trace" d={d} />
+        {rem.map((r) => <line class="rem" x1={r.x1} x2={r.x2} y1={r.y} y2={r.y} />)}
+      </svg>
+      <ol class="ticks" aria-hidden="true">
+        {ticks.map((tk) => <li style={`left:${tk.left}%`}>{tk.label}</li>)}
+      </ol>
+    </div>
+  </div>
+  <figcaption>One night of sleep, scored in 30-second epochs. REM periods are shown in red.</figcaption>
+</figure>
+
+<style define:vars={{ draw: `${DRAW}s` }}>
+  .hypnogram { margin: 0; }
+  .plot {
+    display: grid;
+    grid-template-columns: 2.75rem 1fr;
+    gap: 0.75rem;
+  }
+  .stages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    height: var(--plot-h);
+    font-size: 0.8125rem;
+    color: var(--muted);
+    text-align: right;
+  }
+  .stages li { display: flex; align-items: center; justify-content: flex-end; }
+  .stages .is-rem { color: var(--rem); font-weight: 700; }
+  .canvas { position: relative; padding-bottom: 1.75rem; }
+  .layer { display: block; width: 100%; height: var(--plot-h); overflow: visible; }
+  .night { position: absolute; inset: 0 0 auto 0; }
+  .grid { stroke: var(--grid); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .grid-v { stroke-dasharray: 2 4; }
+  .trace {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .rem {
+    stroke: var(--rem);
+    stroke-width: 7;
+    stroke-linecap: butt;
+    vector-effect: non-scaling-stroke;
+  }
+  .ticks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1.25rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .ticks li { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+  .ticks li:first-child { transform: none; }
+  figcaption {
+    margin: 0.5rem 0 0 3.5rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 40rem) {
+    .plot { grid-template-columns: 2.25rem 1fr; gap: 0.5rem; }
+    .ticks li:nth-child(even) { display: none; }
+    figcaption { margin-left: 2.75rem; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* The night plays out left to right, once. */
+    .night { animation: reveal var(--draw) cubic-bezier(0.45, 0, 0.25, 1) 0.2s both; }
+  }
+  @keyframes reveal {
+    from { clip-path: inset(-10px 100% -10px 0); }
+    to { clip-path: inset(-10px 0 -10px 0); }
+  }
+</style>

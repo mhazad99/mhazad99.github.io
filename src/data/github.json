@@ -1,0 +1,21 @@
+{
+  "fetchedAt": "2026-11-19T04:30:00.000Z",
+  "profile": {
+    "name": null,
+    "bio": null,
+    "location": null,
+    "company": null,
+    "avatar": null,
+    "url": "https://github.com/mhazad99"
+  },
+  "repos": [
+    { "name": "RenameNatus", "description": "Repository used to rename Natus files", "url": "https://github.com/mhazad99/RenameNatus", "homepage": null, "language": "Python", "topics": [], "stars": 0, "pushedAt": "2026-10-09T17:14:12Z", "fork": false, "archived": false },
+    { "name": "Heart-Brain-Project", "description": null, "url": "https://github.com/mhazad99/Heart-Brain-Project", "homepage": null, "language": "MATLAB", "topics": [], "stars": 0, "pushedAt": "2026-03-11T20:23:40Z", "fork": false, "archived": false },
+    { "name": "Rapid-Eye-Movement", "description": null, "url": "https://github.com/mhazad99/Rapid-Eye-Movement", "homepage": null, "language": "Python", "topics": [], "stars": 0, "pushedAt": "2025-09-22T20:25:08Z", "fork": false, "archived": false },
+    { "name": "Automatic-Sleep-Scoring-Package", "description": null, "url": "https://github.com/mhazad99/Automatic-Sleep-Scoring-Package", "homepage": null, "language": "Python", "topics": [], "stars": 0, "pushedAt": "2025-03-25T19:41:10Z", "fork": true, "archived": false },
+    { "name": "yasa", "description": null, "url": "https://github.com/mhazad99/yasa", "homepage": null, "language": "Python", "topics": [], "stars": 0, "pushedAt": "2025-03-25T18:51:07Z", "fork": true, "archived": false },
+    { "name": "SleepTransformerMASS", "description": null, "url": "https://github.com/mhazad99/SleepTransformerMASS", "homepage": null, "language": "Python", "topics": [], "stars": 0, "pushedAt": "2025-03-07T16:27:17Z", "fork": true, "archived": false },
+    { "name": "Machine-Learning-for-Engineers", "description": null, "url": "https://github.com/mhazad99/Machine-Learning-for-Engineers", "homepage": null, "language": "Jupyter Notebook", "topics": [], "stars": 0, "pushedAt": "2023-11-24T23:52:16Z", "fork": false, "archived": false },
+    { "name": "OOPS", "description": null, "url": "https://github.com/mhazad99/OOPS", "homepage": null, "language": "Python", "topics": [], "stars": 0, "pushedAt": "2020-02-21T14:12:29Z", "fork": false, "archived": false }
+  ]
+}
